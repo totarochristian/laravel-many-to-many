@@ -15,17 +15,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('projects', ProjectController::class)->parameters(['projects' => 'project:slug']);
+    Route::resource('categories', CategoryController::class)->parameters(['categories' => 'category:slug']);
+    Route::resource('tags', TagController::class)->parameters(['tags' => 'tag:slug']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';
+
+//la rotta di fallback deve esere sempre l'ultima
+Route::fallback(function () {
+    return redirect()->route('home');
+});
