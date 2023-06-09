@@ -20,7 +20,7 @@ class ProjectSeeder extends Seeder
         foreach ($projects as $project) {
             $new = new Project();
             $new->user_id = 1;
-            $new->category_id = 1;
+            $new->category_id = $project['category_id'];
             $new->title = $project['title'];
             $new->slug = Str::slug($project['title'], '-');
             $new->image = $project['image'];
