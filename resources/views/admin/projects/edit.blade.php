@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Edit Project: {{ $proj->title }}</h1>
-    <form action="{{ route('admin.projects.update', $proj->slug) }}" method="POST" enctype="multipart/form-data">
+    <h1>Edit Project: {{ $project->title }}</h1>
+    <form action="{{ route('admin.projects.update', $project->slug) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="mb-3">
             <label for="title">Title</label>
             <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title"
-                required maxlength="150" minlength="3" value="{{ old('title', $proj->title) }}">
+                required maxlength="150" minlength="3" value="{{ old('title', $project->title) }}">
             @error('title')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -16,12 +16,12 @@
         <div class="d-flex">
             <div class="media me-4">
                 <img id="uploadPreview" class="shadow" width="150"
-                    src="{{ $proj->image ?? 'https://via.placeholder.com/300x200' }}" alt="{{ $proj->title }}">
+                    src="{{ $project->image ?? 'https://via.placeholder.com/300x200' }}" alt="{{ $project->title }}">
             </div>
             <div class="mb-3">
                 <label for="image">Image</label>
                 <input type="file" class="form-control @error('image') is-invalid @enderror" name="image"
-                    id="image" maxlength="255" value="{{ old('image', $proj->image) }}">
+                    id="image" maxlength="255" value="{{ old('image', $project->image) }}">
                 @error('image')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -34,7 +34,7 @@
                 <option value="">Seleziona categoria</option>
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}"
-                        {{ $category->id == old('category_id', $proj->category_id) ? 'selected' : '' }}>
+                        {{ $category->id == old('category_id', $project->category_id) ? 'selected' : '' }}>
                         {{ $category->name }}
                     </option>
                 @endforeach
@@ -44,7 +44,7 @@
             @enderror
             <div class="mb-3">
                 <label for="body">Body</label>
-                <textarea name="body" id="body" rows="10" class="form-control @error('body') is-invalid @enderror">{{ old('body', $proj->body) }}</textarea>
+                <textarea name="body" id="body" rows="10" class="form-control @error('body') is-invalid @enderror">{{ old('body', $project->body) }}</textarea>
                 @error('body')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -58,7 +58,7 @@
                                 {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}>
                         @else
                             <input type="checkbox" name="tags[]" value="{{ $tag->id }}" class="form-check-input"
-                                {{ $proj->tags->contains($tag) ? 'checked' : '' }}>
+                                {{ $project->tags->contains($tag) ? 'checked' : '' }}>
                         @endif
                         <label for="" class="form-check-label">{{ $tag->name }}</label>
                     </div>
