@@ -6,7 +6,7 @@
         <div class="sidebar-brand-icon">
             <i class="fa-regular fa-newspaper"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Tomorrow</div>
+        <div class="sidebar-brand-text mx-3">Boolfolio</div>
     </a>
 
     <!-- Divider -->
@@ -31,7 +31,7 @@
     <li class="nav-item">
         <a class="nav-link" role="button" href="{{ route('admin.projects.index') }}">
             <i class="fa-solid fa-note-sticky"></i>
-            <span>Articles</span>
+            <span>Projects</span>
         </a>
     </li>
     <li class="nav-item">
