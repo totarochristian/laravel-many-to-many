@@ -3,7 +3,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePostRequest extends FormRequest
+class StoreProjectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,7 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|unique:posts|max:150|min:3',
+            'title' => 'required|unique:projects|max:150|min:3',
             'image' => 'nullable|max:255',
             'live_site' => 'nullable|max:255',
             'git_repository' => 'nullable|max:255',
@@ -37,7 +37,7 @@ class StorePostRequest extends FormRequest
     {
         return [
             'title.required' => 'Il titolo è obbligatorio!',
-            'title.unique:posts' => 'Questo titolo esiste già!',
+            'title.unique:projects' => 'Questo titolo esiste già!',
             'title.max' => 'Il titolo deve essere lungo massimo :max caratteri!',
             'title.min' => 'Il titolo deve essere lungo almeno :min caratteri!',
             'image.max' => 'La URL deve essere lungo massimo :max caratteri!',
